@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
-import Header from './components/Header/Header';
-import Form from './components/Form/Form';
-import Footer from './components/Footer/Footer'; 
-import { ToastProvider } from 'react-toast-notifications';
+import './App.css';
+import { HomePage } from './Pages/HomePage/HomePage';
+import { DetailsPage } from './Pages/DetailsPage/DetailsPage';
+import { createBrowserHistory } from "history";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams
+} from "react-router-dom";
+
+const customHistory = createBrowserHistory();
 
 function App() {
   return (
-    <ToastProvider
-      autoDismiss
-      autoDismissTimeout={6000}
-      placement="bottom-center">
-      <div className="App">
-        <Header/>
-        <Form/>
-        <Footer/>
-      </div>
-    </ToastProvider>
-    
+    <Router history={customHistory}>
+      <Switch>
+        <Route exact path="/" component={HomePage}/>
+        <Route exact path="/:movieSlug" component={DetailsPage}/>
+      </Switch>
+    </Router>
   );
 }
 
